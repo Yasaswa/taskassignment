@@ -1,0 +1,56 @@
+CREATE OR REPLACE
+ALGORITHM = UNDEFINED VIEW `hmv_leaves_applications_rpt` AS
+SELECT
+    CONCAT(IFNULL(`la`.`leaves_applications_id`, ''), ':Leaves Application Id:O:N:') AS `leaves_applications_id`,
+    CONCAT(IFNULL(`la`.`leaves_application_date`, ''), ':Leaves Application Date :Y:D:') AS `leaves_application_date`,
+    CONCAT(IFNULL(`la`.`leave_status`, ''), ':Leave Status:Y:H:(Pending,Approved,Rejected,Cancelled)') AS `leave_status`,
+    CONCAT(IFNULL(`la`.`employee_type`, ''), ':Employee Type:O:N:') AS `employee_type`,
+    CONCAT(IFNULL(`la`.`employee_code`, ''), ':Employee Code:O:N:') AS `employee_code`,
+    CONCAT(IFNULL(`la`.`punch_code`, ''), ':Punch Code:O:N:') AS `punch_code`,
+    CONCAT(IFNULL(`la`.`employee_name`, ''), ':Employee Name:Y:C:cmv_employee_list:F') AS `employee_name`,
+    CONCAT(IFNULL(`la`.`designation_name`, ''), ':Designation Name:Y:C:cmv_designation:F') AS `designation_name`,
+    CONCAT(IFNULL(`la`.`department_name`, ''), ':Department Name:Y:C:cmv_department:F') AS `department_name`,
+    CONCAT(IFNULL(`la`.`leave_type_name`, ''), ':Leave Type Name:Y:C:hmv_leave_type:F') AS `leave_type_name`,
+    CONCAT(IFNULL(`la`.`leave_type_code`, ''), ':Leave Type Code:O:N:') AS `leave_type_code`,
+    CONCAT(IFNULL(`la`.`leave_type_paid_flag`, ''), ':Leave Paid Flag:Y:H:(Yes, No)') AS `leave_type_paid_flag`,
+    CONCAT(IFNULL(`la`.`leaves_requested_from_date`, ''), ':Leaves Requested From Date:Y:D:') AS `leaves_requested_from_date`,
+    CONCAT(IFNULL(`la`.`leaves_requested_to_date`, ''), ':Leaves Requested To Date:Y:D:') AS `leaves_requested_to_date`,
+    CONCAT(IFNULL(`la`.`leaves_applied_days`, ''), ':Leaves Applied Days:Y:T:') AS `leaves_applied_days`,
+    CONCAT(IFNULL(`la`.`leaves_approved_from_date`, ''), ':Leaves Approved From Date:Y:D:') AS `leaves_approved_from_date`,
+    CONCAT(IFNULL(`la`.`leaves_approved_to_date`, ''), ':Leaves Approved To Date:Y:D:') AS `leaves_approved_to_date`,
+    CONCAT(IFNULL(`la`.`leaves_sanction_days`, ''), ':Leaves Sanction Days:Y:T:') AS `leaves_sanction_days`,
+    CONCAT(IFNULL(`la`.`leaves_rejection_days`, ''), ':Leaves Rejection Days:Y:T:') AS `leaves_rejection_days`,
+    CONCAT(IFNULL(`la`.`leave_sandwich`, ''), ':Leaves Sandwich Status:Y:H:(Yes, No)') AS `leave_sandwich`,
+    CONCAT(IFNULL(`la`.`work_handover_to`, ''), ':Work Handover To:Y:C:cmv_employee_list:F') AS `work_handover_to`,
+    CONCAT(IFNULL(`la`.`reporting_to_name`, ''), ':Reporting To Name:Y:C:cmv_employee_list:F') AS `reporting_to_name`,
+    CONCAT(IFNULL(`la`.`approved_by_name`, ''), ':Leaves Approved By:Y:C:cmv_employee_list:F') AS `approved_by_name`,
+    CONCAT(IFNULL(`la`.`entered_by_name`, ''), ':Entered By Name:Y:C:hmv_employee_list:F') AS `entered_by_name`,
+    CONCAT(IFNULL(`la`.`approved_date`, ''), ':Approved Date:Y:D:') AS `approved_date`,
+    CONCAT(IFNULL(`la`.`leave_reason`, ''), ':Leave Reason:O:N:') AS `leave_reason`,
+    CONCAT(IFNULL(`la`.`leave_approve_remark`, ''), ':Remark:O:N:') AS `leave_approve_remark`,
+    CONCAT(IFNULL(`la`.`leave_type_id`, ''), ':Leave Type Id:O:N:') AS `leave_type_id`,
+    CONCAT(IFNULL(`la`.`work_handover_id`, ''), ':Work Handover Id:O:N:') AS `work_handover_id`,
+    CONCAT(IFNULL(`la`.`reporting_to`, ''), ':Reporting To:O:N:') AS `reporting_to`,
+    CONCAT(IFNULL(`la`.`department_id`, ''), ':Department Id:O:N:') AS `department_id`,
+    CONCAT(IFNULL(`la`.`employee_id`, ''), ':Employee Id:O:N:') AS `employee_id`,
+    CONCAT(IFNULL(`la`.`is_active`, ''), ':Is Active:O:N:') AS `is_active`,
+    CONCAT(IFNULL(`la`.`is_delete`, ''), ':Is Delete:O:N:') AS `is_delete`,
+    CONCAT(CASE WHEN `la`.`is_active` = 1 THEN 'Active' ELSE 'In Active' END, ':Active Status:Y:H:(Active, In Active)') AS `Active`,
+    CONCAT(CASE WHEN `la`.`is_delete` = 1 THEN 'Yes' ELSE 'No' END, ':Deleted Status:Y:H:(Yes, No)') AS `Deleted`,
+    CONCAT(IFNULL(`la`.`created_by`, ''), ':Created By:O:N:') AS `created_by`,
+    CONCAT(IFNULL(`la`.`created_on`, ''), ':Created On:O:N:') AS `created_on`,
+    CONCAT(IFNULL(`la`.`modified_by`, ''), ':Modified By:O:N:') AS `modified_by`,
+    CONCAT(IFNULL(`la`.`modified_on`, ''), ':Modified On:O:N:') AS `modified_on`,
+    CONCAT(IFNULL(`la`.`deleted_by`, ''), ':Deleted By:O:N:') AS `deleted_by`,
+    CONCAT(IFNULL(`la`.`deleted_on`, ''), ':Deleted On:O:N:') AS `deleted_on`,
+    CONCAT(IFNULL(`la`.`financial_year`, ''), ':Financial Year:O:N:') AS `financial_year`,
+    CONCAT(IFNULL(`la`.`company_id`, ''), ':Company Id:N:N:') AS `company_id`,
+    CONCAT(IFNULL(`la`.`leaves_transaction_id`, ''), ':Leaves Transaction Id:O:N:') AS `leaves_transaction_id`,
+    CONCAT(IFNULL(`la`.`field_id`, ''), ':Field Id:N:N:') AS `field_id`,
+    CONCAT(IFNULL(`la`.`field_name`, ''), ':Field Name:N:N:') AS `field_name`
+FROM
+    `hmv_leaves_applications` `la`
+WHERE
+    `la`.`is_delete` = 0
+LIMIT 1;
+

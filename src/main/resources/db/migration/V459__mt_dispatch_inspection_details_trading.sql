@@ -1,0 +1,1 @@
+ALTER TABLE mt_dispatch_inspection_details_trading MODIFY COLUMN width decimal(18,4) DEFAULT 0.0000 NULL;

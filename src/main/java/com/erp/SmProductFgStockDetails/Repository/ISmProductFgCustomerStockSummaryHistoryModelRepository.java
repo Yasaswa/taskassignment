@@ -1,0 +1,7 @@
+package com.erp.SmProductFgStockDetails.Repository;
+
+import com.erp.SmProductFgStockDetails.Model.CSmProductFgCustomerStockSummaryHistoryModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ISmProductFgCustomerStockSummaryHistoryModelRepository extends JpaRepository<CSmProductFgCustomerStockSummaryHistoryModel, Integer> {
+}

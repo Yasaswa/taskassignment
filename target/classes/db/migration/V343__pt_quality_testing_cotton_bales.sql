@@ -1,0 +1,1 @@
+ALTER TABLE pt_quality_testing_cotton_bales MODIFY COLUMN cg varchar(50) NULL;

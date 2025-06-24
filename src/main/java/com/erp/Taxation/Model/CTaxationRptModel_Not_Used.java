@@ -1,0 +1,221 @@
+package com.erp.Taxation.Model;
+
+import lombok.Data;
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Data
+@Entity
+@Immutable
+@Subselect("select * from cmv_taxation_rpt")
+public class CTaxationRptModel_Not_Used {
+
+	@Id
+	private String taxation_id;
+	private String company_name;
+	private String taxtype_name;
+	private String tax_value;
+	private String tax_Applicable_on;
+	private String start_date;
+	private String end_date;
+	private String is_active;
+	private String is_delete;
+	private String created_by;
+	private String created_on;
+	private String modified_by;
+	private String modified_on;
+	private String deleted_by;
+	private String deleted_on;
+	private String company_id;
+	private String taxtype_id;
+	private String field_name;
+	private String field_id;
+
+	public String getTaxation_id() {
+		return taxation_id;
+	}
+
+	public void setTaxation_id(String taxation_id) {
+		this.taxation_id = taxation_id;
+	}
+
+	public String getCompany_name() {
+		return company_name;
+	}
+
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
+	}
+
+	public String getTaxtype_name() {
+		return taxtype_name;
+	}
+
+	public void setTaxtype_name(String taxtype_name) {
+		this.taxtype_name = taxtype_name;
+	}
+
+	public String getTax_value() {
+		return tax_value;
+	}
+
+	public void setTax_value(String tax_value) {
+		this.tax_value = tax_value;
+	}
+
+	public String getTax_Applicable_on() {
+		return tax_Applicable_on;
+	}
+
+	public void setTax_Applicable_on(String tax_Applicable_on) {
+		this.tax_Applicable_on = tax_Applicable_on;
+	}
+
+	public String getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+
+	public String getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+
+	public String getIs_active() {
+		return is_active;
+	}
+
+	public void setIs_active(String is_active) {
+		this.is_active = is_active;
+	}
+
+	public String getIs_delete() {
+		return is_delete;
+	}
+
+	public void setIs_delete(String is_delete) {
+		this.is_delete = is_delete;
+	}
+
+	public String getCreated_by() {
+		return created_by;
+	}
+
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
+	}
+
+	public String getCreated_on() {
+		return created_on;
+	}
+
+	public void setCreated_on(String created_on) {
+		this.created_on = created_on;
+	}
+
+	public String getModified_by() {
+		return modified_by;
+	}
+
+	public void setModified_by(String modified_by) {
+		this.modified_by = modified_by;
+	}
+
+	public String getModified_on() {
+		return modified_on;
+	}
+
+	public void setModified_on(String modified_on) {
+		this.modified_on = modified_on;
+	}
+
+	public String getDeleted_by() {
+		return deleted_by;
+	}
+
+	public void setDeleted_by(String deleted_by) {
+		this.deleted_by = deleted_by;
+	}
+
+	public String getDeleted_on() {
+		return deleted_on;
+	}
+
+	public void setDeleted_on(String deleted_on) {
+		this.deleted_on = deleted_on;
+	}
+
+	public String getCompany_id() {
+		return company_id;
+	}
+
+	public void setCompany_id(String company_id) {
+		this.company_id = company_id;
+	}
+
+	public String getTaxtype_id() {
+		return taxtype_id;
+	}
+
+	public void setTaxtype_id(String taxtype_id) {
+		this.taxtype_id = taxtype_id;
+	}
+
+	public String getField_name() {
+		return field_name;
+	}
+
+	public void setField_name(String field_name) {
+		this.field_name = field_name;
+	}
+
+	public String getField_id() {
+		return field_id;
+	}
+
+	public void setField_id(String field_id) {
+		this.field_id = field_id;
+	}
+
+	public CTaxationRptModel_Not_Used(String taxation_id, String company_name, String taxtype_name, String tax_value,
+	                                  String tax_Applicable_on, String start_date, String end_date, String is_active, String is_delete,
+	                                  String created_by, String created_on, String modified_by, String modified_on, String deleted_by,
+	                                  String deleted_on, String company_id, String taxtype_id, String field_name, String field_id) {
+		super();
+		this.taxation_id = taxation_id;
+		this.company_name = company_name;
+		this.taxtype_name = taxtype_name;
+		this.tax_value = tax_value;
+		this.tax_Applicable_on = tax_Applicable_on;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.is_active = is_active;
+		this.is_delete = is_delete;
+		this.created_by = created_by;
+		this.created_on = created_on;
+		this.modified_by = modified_by;
+		this.modified_on = modified_on;
+		this.deleted_by = deleted_by;
+		this.deleted_on = deleted_on;
+		this.company_id = company_id;
+		this.taxtype_id = taxtype_id;
+		this.field_name = field_name;
+		this.field_id = field_id;
+	}
+
+	public CTaxationRptModel_Not_Used() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+}

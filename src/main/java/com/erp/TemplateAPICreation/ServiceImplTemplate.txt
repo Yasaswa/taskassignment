@@ -1,0 +1,164 @@
+package com.erp.#FormHeading#.Service;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+
+import com.erp.#FormHeading#.Model.C#FormHeading#Model;
+import com.erp.#FormHeading#.Model.C#FormHeading#RptModel;
+import com.erp.#FormHeading#.Model.C#FormHeading#ViewModel;
+import com.erp.#FormHeading#.Repository.I#FormHeading#Repository;
+import com.erp.#FormHeading#.Repository.I#FormHeading#RptRepository;
+import com.erp.#FormHeading#.Repository.I#FormHeading#ViewRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Service
+public class C#FormHeading#ServiceImpl implements I#FormHeading#Service {
+
+	@Autowired
+	CAmApplicationErrorLogsServiceImpl amApplicationErrorLogsServiceImpl;
+
+	@Autowired
+	I#FormHeading#Repository i#FormHeading#Repository;
+
+	@Autowired
+	I#FormHeading#ViewRepository i#FormHeading#ViewRepository;
+
+	@Autowired
+	I#FormHeading#RptRepository i#FormHeading#RptRepository;
+	
+	@Override
+	public Map<String, Object> FnAddUpdateRecord(C#FormHeading#Model c#FormHeading#Model) {
+		Map<String, Object> responce = new HashMap<>();
+		Optional<C#FormHeading#Model> option = i#FormHeading#Repository
+				.findById(c#FormHeading#Model.getTrans_id());
+		C#FormHeading#Model MyModel = null;
+		int company_id = c#FormHeading#Model.getCompany_id();
+		try {
+			if (option.isPresent()) {
+			    c#FormHeading#Model.setModified_on(new Date());
+				C#FormHeading#Model c#FormHeading#Model = i#FormHeading#Repository.save(c#FormHeading#Model);
+				responce.put("success", "1");
+				responce.put("data", c#FormHeading#Model);
+				responce.put("error", "");
+				responce.put("message", "Record updated successfully!...");
+				System.out.println(" #FormHeading# Updated Successfully!..");
+			} else {
+				C#FormHeading#Model model = i#FormHeading#Repository
+						.checkIfNameExist(c#FormHeading#Model.getSupp_branch_name());
+
+				if (model != null) {
+					responce.put("success", "0");
+					responce.put("data", "");
+					responce.put("error", " #FormHeading#  is already exist!");
+
+					return responce;
+
+				} else {
+
+					C#FormHeading#Model respContent = i#FormHeading#Repository.save(c#FormHeading#Model);
+
+					responce.put("success", "1");
+					responce.put("data", respContent);
+					responce.put("error", "");
+					responce.put("message", "Record added successfully!...");
+				}
+			}
+		} catch (DataAccessException e) {
+			if (e.getRootCause() instanceof SQLException) {
+				SQLException sqlEx = (SQLException) e.getRootCause();
+				amApplicationErrorLogsServiceImpl.addErrorLog(company_id, "api", "/api/producttype/FnAddUpdateRecord",
+						sqlEx.getErrorCode(), sqlEx.getMessage());
+				System.out.println(sqlEx.getMessage());
+				responce.put("success", "0");
+				responce.put("data", "");
+				responce.put("error", e.getMessage());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			amApplicationErrorLogsServiceImpl.addErrorLog(company_id, "api", "/api/producttype/FnAddUpdateRecord", 0,
+					e.getMessage());
+			responce.put("success", "0");
+			responce.put("data", "");
+			responce.put("error", e.getMessage());
+
+		}
+
+		return responce;
+
+	}
+
+	
+	
+	@Override
+	public Object FnDeleteRecord(int Trans_id, int company_id) {
+	Optional<C#FormHeading#Model> option = i#FormHeading#Repository.findById(Trans_id);
+		C#FormHeading#Model c#FormHeading#Model = new C#FormHeading#Model();
+		if(option.isPresent()) {
+			c#FormHeading#Model = option.get();
+			c#FormHeading#Model.setIs_delete(true);
+			c#FormHeading#Model.setDeleted_on(new Date());
+			i#FormHeading#Repository.save(c#FormHeading#Model);
+			
+		}
+		return c#FormHeading#Model;
+	}
+	
+	@Override
+	public Page<C#FormHeading#ViewModel> FnShowAllActiveRecords(Pageable pageable, int company_id) {
+		return i#FormHeading#ViewRepository.FnShowAllActiveRecords(pageable);
+	}
+
+	@Override
+	public Map<String, Object> FnShowParticularRecordForUpdate(int Trans_id, int company_id) {
+		Map<String, Object> responce = new HashMap<>();
+		C#FormHeading#Model c#FormHeading#Model = null;
+		try {
+			c#FormHeading#Model  = i#FormHeading#Repository.FnShowParticularRecordForUpdate(Trans_id, company_id);
+			responce.put("success", "1");
+			responce.put("data", c#FormHeading#Model);
+			responce.put("error", "");
+		} catch (DataAccessException e) {
+			if (e.getRootCause() instanceof SQLException) {
+				SQLException sqlEx = (SQLException) e.getRootCause();
+				System.out.println(sqlEx.getMessage());
+				responce.put("success", "0");
+				responce.put("data", "");
+				responce.put("error", e.getMessage());
+				return responce;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			responce.put("success", "0");
+			responce.put("data", "");
+			responce.put("error", e.getMessage());
+            return responce;
+		}
+	return responce;
+	}
+
+	@Override
+	public Page<C#FormHeading#RptModel> FnShowAllReportRecords(Pageable pageable, int company_id) {
+		return i#FormHeading#RptRepository.FnShowAllReportRecords(pageable, company_id);
+	}
+	
+	@Override
+	public Page<C#FormHeading#ViewModel> FnShowParticularRecord(int Trans_id, Pageable pageable, int company_id) {
+		return i#FormHeading#ViewRepository.FnShowParticularRecord(Trans_id, pageable, company_id);
+	}
+	
+	}

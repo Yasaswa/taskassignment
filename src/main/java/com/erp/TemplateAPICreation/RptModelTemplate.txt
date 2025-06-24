@@ -1,0 +1,22 @@
+package com.erp.#FormHeading#.Model;
+
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Immutable
+@Subselect("select * from  #TableName#")
+public class C#FormHeading#RptModel {
+
+
+ #CreateAPIProperties#
+ #CreateAPIPropertiesGetSet#
+ #CreateAPIConstructor#
+

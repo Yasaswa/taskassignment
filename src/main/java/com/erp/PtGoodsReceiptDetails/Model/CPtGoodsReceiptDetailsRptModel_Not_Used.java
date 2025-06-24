@@ -1,0 +1,151 @@
+package com.erp.PtGoodsReceiptDetails.Model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Immutable
+@Subselect("select * from  ptv_goods_receipt_details_rpt")
+public class CPtGoodsReceiptDetailsRptModel_Not_Used {
+
+	@Id
+	private String goods_receipt_details_transaction_id;
+	private String goods_receipt_no;
+	private String goods_receipt_date;
+	private String goods_receipt_version;
+	private String grn_item_status_desc;
+	private String purchase_order_no;
+	private String purchase_order_date;
+	private String purchase_order_version;
+	private String purchase_order_status_desc;
+	private String purchase_order_item_status_desc;
+	private String purchase_order_life;
+	private String supplier_challan_no;
+	private String supplier_challan_date;
+	private String supplier_name;
+	private String supplier_city_name;
+	private String supplier_state_name;
+	private String customer_order_no;
+	private String customer_order_Date;
+	private String item_qa_by_id;
+	private String item_qa_date;
+	private String goods_receipt_type;
+	private String product_material_tech_spect;
+	private String lead_time;
+	private String sr_no;
+	private String purchase_order_status;
+	private String purchase_order_item_status;
+	private String product_material_name;
+	private String product_material_stock_unit_name;
+	private String product_material_type_group;
+	private String product_type_name;
+	private String product_type_short_name;
+	private String product_make_name;
+	private String product_category1_name;
+	private String product_category2_name;
+	private String product_category3_name;
+	private String product_category4_name;
+	private String product_category5_name;
+	private String product_material_type_name;
+	private String product_material_grade_name;
+	private String product_material_shape_name;
+	private String product_material_oem_part_code;
+	private String product_material_our_part_code;
+	private String product_material_drawing_no;
+	private String product_material_hsn_sac_code;
+	private String grn_item_status;
+	private String excess_quantity;
+	private String excess_weight;
+	private String pree_closed_grn_quantity;
+	private String pree_closed_grn_weight;
+	private String purchase_return_quantity;
+	private String purchase_return_weight;
+	private String production_issue_quantity;
+	private String production_issue_weight;
+	private String production_issue_return_quantity;
+	private String production_issue_return_weight;
+	private String production_issue_rejection_quantity;
+	private String production_issue_rejection_weight;
+	private String assembly_production_issue_quantity;
+	private String assembly_production_issue_weight;
+	private String product_material_prev_accepted_quantity;
+	private String product_material_prev_accepted_weight;
+	private String sales_quantity;
+	private String sales_weight;
+	private String sales_return_quantity;
+	private String sales_return_weight;
+	private String sales_rejection_quantity;
+	private String sales_rejection_weight;
+	private String transfer_issue_quantity;
+	private String transfer_issue_weight;
+	private String transfer_receipt_quantity;
+	private String transfer_receipt_weight;
+	private String outsources_out_quantity;
+	private String outsources_out_weight;
+	private String outsources_in_quantity;
+	private String outsources_in_weight;
+	private String outsources_rejection_quantity;
+	private String outsources_rejection_weight;
+	private String loan_receipt_quantity;
+	private String loan_receipt_weight;
+	private String loan_issue_quantity;
+	private String loan_issue_weight;
+	private String cancel_quantity;
+	private String cancel_weight;
+	private String difference_quantity;
+	private String difference_weight;
+	private String remark;
+	private String company_name;
+	private String company_branch_name;
+	private String financial_year;
+	private String expiry_date;
+	private String is_active;
+	private String is_delete;
+	private String created_by;
+	private String created_on;
+	private String modified_by;
+	private String modified_on;
+	private String deleted_by;
+	private String deleted_on;
+	private String company_id;
+	private String company_branch_id;
+	private String department_id;
+	private String product_material_unit_id;
+	private String product_material_packing_id;
+	private String product_material_hsn_code_id;
+	private String goods_receipt_type_id;
+	private String product_material_id;
+	private String supplier_id;
+	private String approved_by_id;
+	private String supplier_state_id;
+	private String supplier_city_id;
+	private String supplier_contacts_ids;
+	private String expected_branch_id;
+	private String expected_branch_state_id;
+	private String expected_branch_city_id;
+	private String payment_term_id;
+	private String agent_id;
+	private String product_type_id;
+	private String godown_id;
+	private String godown_section_id;
+	private String godown_section_beans_id;
+	private String product_material_type_id;
+	private String product_material_stock_unit_id;
+	private String product_material_grade_id;
+	private String product_material_shape_id;
+	private String product_category1_id;
+	private String product_category2_id;
+	private String product_category3_id;
+	private String product_category4_id;
+	private String product_category5_id;
+
+}

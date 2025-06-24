@@ -1,0 +1,1 @@
+ALTER TABLE hm_salary_rules ADD employee_type_id bigint(20) DEFAULT NULL NULL;

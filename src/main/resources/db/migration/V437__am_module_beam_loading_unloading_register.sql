@@ -1,0 +1,2 @@
+INSERT INTO am_modules_forms (company_id,company_branch_id,module_id,sub_module_id,modules_menu_id,modules_sub_menu_id,modules_forms_name,display_sequence,display_name,menu_type,listing_component_name,listing_navigation_url,page_header,is_selected,is_active,is_delete,is_protected,header,footer,url_parameter)
+	VALUES (1,1,1,27,6,32,'Beam Issue Slip Register',12,'Beam Issue Slip Register','Registers','<FrmTBeamIssueSlipListing compType=''Register''/>','/Transactions/TBeamIssueSlip/TBeamIssueSlipListing/reg','Beam Issue Slip Register',0,1,0,0,1,1,'');

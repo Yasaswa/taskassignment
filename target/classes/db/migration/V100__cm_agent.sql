@@ -1,0 +1,1 @@
+ALTER TABLE cm_agent MODIFY COLUMN password varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;

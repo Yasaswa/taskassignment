@@ -1,0 +1,1 @@
+ALTER TABLE sm_product_fg MODIFY COLUMN product_category1_id bigint(20) DEFAULT 1 NULL;

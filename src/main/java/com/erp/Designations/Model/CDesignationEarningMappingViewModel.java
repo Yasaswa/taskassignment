@@ -1,0 +1,65 @@
+package com.erp.Designations.Model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Subselect;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Date;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity
+@Immutable
+@Subselect("select * from hmv_designation_earning_mapping")
+public class CDesignationEarningMappingViewModel {
+
+	@Id
+	private int designation_earning_mapping_id;
+	private Date effective_date;
+	private String designation_name;
+	private String designation_short_name;
+	private String earning_code;
+	private String earning_head_name;
+	private String earning_type;
+	private String earning_head_short_name;
+	private String calculation_type;
+	private double calculation_value;
+	private String formula;
+	private String Active;
+	private String Deleted;
+	private boolean is_active = Boolean.TRUE;
+	private boolean is_delete = Boolean.FALSE;
+	private String created_by;
+	private Date created_on;
+	private String modified_by;
+	private Date modified_on;
+	private String deleted_by;
+	private Date deleted_on;
+	private Integer company_id;
+	private Integer designation_id;
+	private Integer earning_heads_id;
+
+
+	public boolean isIs_active() {
+		return is_active;
+	}
+
+	public void setIs_active(boolean is_active) {
+		this.is_active = is_active;
+	}
+
+	public boolean isIs_delete() {
+		return is_delete;
+	}
+
+	public void setIs_delete(boolean is_delete) {
+		this.is_delete = is_delete;
+	}
+
+
+}

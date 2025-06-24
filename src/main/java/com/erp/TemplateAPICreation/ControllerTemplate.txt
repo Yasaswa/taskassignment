@@ -1,0 +1,76 @@
+package com.erp.#FormHeading#.Controller;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.erp.#FormHeading#.Model.C#FormHeading#Model;
+import com.erp.#FormHeading#.Model.C#FormHeading#RptModel;
+import com.erp.#FormHeading#.Model.C#FormHeading#ViewModel;
+import com.erp.#FormHeading#.Service.I#FormHeading#Service;
+import com.erp.#FormHeading#.Service.C#FormHeading#ServiceImpl;
+import com.erp.security.auth.JwtUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@RestController
+@RequestMapping("/api/#FormHeading#")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+public class C#FormHeading#Controller {
+
+	@Autowired
+	I#FormHeading#Service i#FormHeading#Service;
+
+	@PostMapping("/FnAddUpdateRecord")
+	public Map<String, Object> FnAddUpdateRecord(@RequestBody C#FormHeading#Model #FormHeading#Model) {
+		return i#FormHeading#Service.FnAddUpdateRecord(#FormHeading#Model);
+
+	}
+
+	@DeleteMapping("/FnDeleteRecord/{Trans_id}/{company_id}")
+	public Object FnDeleteRecord(@PathVariable int Trans_id, @PathVariable int company_id) {
+		return i#FormHeading#Service.FnDeleteRecord(Trans_id, company_id);
+
+	}
+
+	@GetMapping("/FnShowAllActiveRecords/{company_id}")
+	public Page<C#FormHeading#ViewModel> FnShowAllActiveRecords(Pageable pageable, @PathVariable int company_id) throws SQLException {
+		Page<C#FormHeading#ViewModel> c#FormHeading#ViewModel = i#FormHeading#Service.FnShowAllActiveRecords(pageable, company_id);
+		return c#FormHeading#ViewModel;
+	}
+
+	@GetMapping("/FnShowParticularRecordForUpdate/{Trans_id}/{company_id}")
+	public Map<String, Object> FnShowParticularRecordForUpdate(@PathVariable int Trans_id, @PathVariable int company_id)  {
+		return  i#FormHeading#Service.FnShowParticularRecordForUpdate(Trans_id, company_id);
+	}
+
+	@GetMapping("/FnShowAllReportRecords/{company_id}")
+	public Page<C#FormHeading#RptModel> FnShowAllReportRecords(Pageable pageable, @PathVariable int company_id) {
+		return i#FormHeading#Service.FnShowAllReportRecords(pageable, company_id);
+
+	}
+	
+	@GetMapping("/FnShowParticularRecords/{Trans_id}/{company_id}")
+	public Page<C#FormHeading#ViewModel> FnShowParticularRecord(@PathVariable int Trans_id, Pageable pageable, @PathVariable int company_id){
+		return i#FormHeading#Service.FnShowParticularRecord(Trans_id, pageable, company_id);
+
+	}
+
+ 	
+ 
+}

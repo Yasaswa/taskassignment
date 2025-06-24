@@ -1,0 +1,29 @@
+package com.erp.#FormHeading#.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.erp.#FormHeading#.Model.C#FormHeading#Model;
+import com.erp.#FormHeading#.Model.C#FormHeading#RptModel;
+import com.erp.#FormHeading#.Model.C#FormHeading#ViewModel;
+
+public interface I#FormHeading#Service {
+
+	Map<String, Object> FnAddUpdateRecord(C#FormHeading#Model c#FormHeading#Model);
+
+	Object FnDeleteRecord(int Trans_id, int company_id);
+
+	Page<C#FormHeading#ViewModel> FnShowAllActiveRecords(Pageable pageable, int company_id);
+
+	Page<C#FormHeading#RptModel> FnShowAllReportRecords(Pageable pageable, int company_id);
+
+	Map<String, Object> FnShowParticularRecordForUpdate(int Trans_id, int company_id);
+	
+	Page<C#FormHeading#ViewModel> FnShowParticularRecord(int Trans_id, Pageable pageable, int company_id);
+
+}

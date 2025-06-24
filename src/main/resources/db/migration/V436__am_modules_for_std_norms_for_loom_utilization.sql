@@ -1,0 +1,3 @@
+INSERT INTO am_modules_forms (company_id,company_branch_id,module_id,sub_module_id,modules_menu_id,modules_sub_menu_id,modules_forms_name,display_sequence,display_name,menu_type,listing_component_name,listing_component_import_path,listing_navigation_url,form_component_name,form_component_import_path,form_navigation_url,is_selected,is_active,is_delete,is_protected,header,footer,url_parameter)
+	VALUES (1,1,1,17,6,32,'Standard Norms For Loom Utilization',13,'Standard Norms For Loom Utilization','Registers','<StdNormsForLoomUtilization/>','import StdNormsForLoomUtilization from "./Transactions/TLoomProductaion/LoomProductionReport/StdNormsForLoomUtilization";
+','/Transactions/TLoomProductaion/LoomProductionReport/StdNormsForLoomUtilization','','','',0,1,0,0,1,1,'');

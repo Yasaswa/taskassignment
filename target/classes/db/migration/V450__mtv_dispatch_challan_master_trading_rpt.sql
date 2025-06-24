@@ -1,0 +1,340 @@
+-- erp_dev.mtv_dispatch_challan_details_trading source
+
+create or replace
+algorithm = UNDEFINED view `mtv_dispatch_challan_details_trading` as
+select
+    `mt`.`dispatch_challan_no` as `dispatch_challan_no`,
+    `mt`.`dispatch_challan_date` as `dispatch_challan_date`,
+    `mt`.`dispatch_challan_version` as `dispatch_challan_version`,
+    `mt`.`dispatch_challan_status_desc` as `dispatch_challan_status_desc`,
+    `mt`.`customer_name` as `customer_name`,
+    `mt`.`customer_state_name` as `customer_state_name`,
+    `mt`.`consignee_name` as `consignee_name`,
+    `mt`.`consignee_state_name` as `consignee_state_name`,
+    `mt`.`approved_date` as `approved_date`,
+    `mt`.`customer_gst_no` as `customer_gst_no`,
+    `mt`.`consignee_gst_no` as `consignee_gst_no`,
+    `mt`.`customer_pan_no` as `customer_pan_no`,
+    `mt`.`consignee_pan_no` as `consignee_pan_no`,
+    `mt`.`transporter_gst_no` as `transporter_gst_no`,
+     `mt`.`driver_name` as `driver_name`,
+    `mt`.`vehicle_no` as `vehicle_no`,
+    `mt`.`vehicle_type` as `vehicle_type`,
+    `mt`.`transporter_challan_no` as `transporter_challan_no`,
+    `mt`.`transporter_challan_date` as `transporter_challan_date`,
+    `mt`.`loading_time` as `loading_time`,
+    `mt`.`transport_mode` as `transport_mode`,
+    `mt`.`transaction_type` as `transaction_type`,
+    `mt`.`is_service` as `is_service`,
+    `mt`.`is_sez` as `is_sez`,
+    `mt`.`interim` as `interim`,
+    `mt`.`overall_schedule_date` as `overall_schedule_date`,
+    `mt`.`basic_total` as `basic_total`,
+    `mt`.`transport_amount` as `transport_amount`,
+    `mt`.`freight_amount` as `freight_amount`,
+    `mt`.`is_freight_taxable` as `is_freight_taxable`,
+    `mt`.`freight_hsn_code_id` as `freight_hsn_code_id`,
+    `mt`.`freight_fg_hsn_sac_code` as `freight_fg_hsn_sac_code`,
+    `mt`.`freight_fg_hsn_sac_rate` as `freight_fg_hsn_sac_rate`,
+    `mt`.`packing_amount` as `packing_amount`,
+    `mt`.`discount_percent` as `discount_percent`,
+    `mt`.`discount_amount` as `discount_amount`,
+    `mt`.`other_amount` as `other_amount`,
+    `mt`.`taxable_total` as `taxable_total`,
+    `mt`.`cgst_percent` as `cgst_percent`,
+    `mt`.`cgst_total` as `cgst_total`,
+    `mt`.`sgst_percent` as `sgst_percent`,
+    `mt`.`sgst_total` as `sgst_total`,
+    `mt`.`igst_percent` as `igst_percent`,
+    `mt`.`igst_total` as `igst_total`,
+    `mt`.`roundoff` as `roundoff`,
+    `mt`.`grand_total` as `grand_total`,
+    `mt`.`agent_id` as `agent_id`,
+    `mt`.`agent_name` as `agent_name`,
+    `mt`.`agent_percent` as `agent_percent`,
+    `mt`.`agent_amount` as `agent_amount`,
+    `mt`.`agent_paid_status` as `agent_paid_status`,
+    `mt`.`dispatch_challan_creation_type_desc` as `dispatch_challan_creation_type_desc`,
+    case
+        `dt`.`dispatch_challan_item_status` when 'A' then 'Aprroved'
+        when 'U' then 'Partial Sales Issue'
+        when 'R' then 'Rejected'
+        when 'C' then 'Completed'
+        when 'X' then 'Canceled'
+        when 'D' then 'Dispath Challan Created'
+        when 'I' then 'Invoice Created'
+        else 'Pending'
+    end as `dispatch_challan_item_status_desc`,
+    `dt`.`sales_order_no` as `sales_order_no`,
+    `dt`.`sales_order_Date` as `sales_order_Date`,
+    `dt`.`sales_order_version` as `sales_order_version`,
+    `dt`.`customer_order_no` as `customer_order_no`,
+    `dt`.`customer_order_Date` as `customer_order_Date`,
+    `dt`.`dispatch_schedule_no` as `dispatch_schedule_no`,
+    `dt`.`dispatch_schedule_date` as `dispatch_schedule_date`,
+    `dt`.`dispatch_schedule_version` as `dispatch_schedule_version`,
+    `dt`.`sr_no` as `sr_no`,
+    `dt`.`product_material_id` as `product_material_id`,
+    `dt`.`so_sr_no` as `so_sr_no`,
+    `rm`.`product_fg_name` as `product_material_name`,
+    `dt`.`product_material_print_name` as `product_material_print_name`,
+    `dt`.`product_material_tech_spect` as `product_material_tech_spect`,
+    `dt`.`product_material_unit_id` as `product_material_unit_id`,
+    `u`.`product_unit_name` as `product_unit_name`,
+    `dt`.`product_material_packing_id` as `product_material_packing_id`,
+    `p`.`product_packing_name` as `product_packing_name`,
+    `dt`.`dispatch_quantity` as `dispatch_quantity`,
+    `dt`.`dispatch_weight` as `dispatch_weight`,
+    `dt`.`hsn_sac_id` as `hsn_sac_id`,
+    `h1`.`hsn_sac_code` as `hsn_sac_code`,
+    `h1`.`hsn_sac_rate` as `hsn_sac_rate`,
+    `dt`.`hsn_sac_percent` as `hsn_sac_percent`,
+    `dt`.`item_rate` as `item_rate`,
+    `dt`.`item_amount` as `item_amount`,
+    `dt`.`item_discount_percent` as `item_discount_percent`,
+    `dt`.`item_discount_amount` as `item_discount_amount`,
+    `dt`.`item_taxable_amount` as `item_taxable_amount`,
+    `dt`.`item_cgst_percent` as `item_cgst_percent`,
+    `dt`.`item_cgst_amount` as `item_cgst_amount`,
+    `dt`.`item_sgst_percent` as `item_sgst_percent`,
+    `dt`.`item_sgst_amount` as `item_sgst_amount`,
+    `dt`.`item_igst_percent` as `item_igst_percent`,
+    `dt`.`item_igst_amount` as `item_igst_amount`,
+    `dt`.`item_total_amount` as `item_total_amount`,
+    `dt`.`item_freight_amount` as `item_freight_amount`,
+    `dt`.`dispatch_return_quantity` as `dispatch_return_quantity`,
+    `dt`.`dispatch_return_weight` as `dispatch_return_weight`,
+    `dt`.`pending_quantity` as `pending_quantity`,
+    `dt`.`pending_weight` as `pending_weight`,
+    `dt`.`expected_schedule_date` as `expected_schedule_date`,
+    `dt`.`delayed_days` as `delayed_days`,
+    `dt`.`invoice_quantity` as `invoice_quantity`,
+    `dt`.`invoice_weight` as `invoice_weight`,
+    `dt`.`pree_close_flag` as `pree_close_flag`,
+    `dt`.`pree_close_quantity` as `pree_close_quantity`,
+    `dt`.`set_no` as `set_no`,
+    `dt`.`dispatch_challan_item_status` as `dispatch_challan_item_status`,
+    `mt`.`dispatch_challan_status` as `dispatch_challan_status`,
+    `mt`.`dispatch_challan_type` as `dispatch_challan_type`,
+    `mt`.`product_type_short_name` as `product_type_short_name`,
+    `mt`.`remark` as `remark`,
+    `v`.`company_legal_name` as `company_name`,
+    `v`.`company_branch_name` as `company_branch_name`,
+    `v`.`company_address1` as `company_address1`,
+    `v`.`company_address2` as `company_address2`,
+    `v`.`company_cell_no` as `company_cell_no`,
+    `v`.`company_phone_no` as `company_phone_no`,
+    `v`.`company_EmailId` as `company_EmailId`,
+    `v`.`company_website` as `company_website`,
+    `v`.`company_gst_no` as `company_gst_no`,
+    `v`.`company_pan_no` as `company_pan_no`,
+    `v`.`company_state` as `company_state`,
+    `v`.`company_pincode` as `company_pincode`,
+    `v`.`company_udyog_adhar_no` as `company_udyog_adhar_no`,
+    `mt`.`financial_year` as `financial_year`,
+    `mt`.`customer_email` as `customer_email`,
+    `mt`.`customer_city_name` as `customer_city_name`,
+    `mt`.`consignee_email` as `consignee_email`,
+    `mt`.`consignee_city_name` as `consignee_city_name`,
+    case
+        when `mt`.`is_active` = 1 then 'Active'
+        else 'In Active'
+    end as `Active`,
+    case
+        when `mt`.`is_delete` = 1 then 'Yes'
+        else 'No'
+    end as `Deleted`,
+    `mt`.`is_active` as `is_active`,
+    `mt`.`is_delete` as `is_delete`,
+    `mt`.`created_by` as `created_by`,
+    `mt`.`created_on` as `created_on`,
+    `mt`.`modified_by` as `modified_by`,
+    `mt`.`modified_on` as `modified_on`,
+    `mt`.`deleted_by` as `deleted_by`,
+    `mt`.`deleted_on` as `deleted_on`,
+    `mt`.`company_id` as `company_id`,
+    `mt`.`dispatch_challan_master_transaction_id` as `dispatch_challan_master_transaction_id`,
+    `dt`.`dispatch_challan_details_transaction_id` as `dispatch_challan_details_transaction_id`,
+    `mt`.`company_branch_id` as `company_branch_id`,
+    `mt`.`expected_branch_id` as `expected_branch_id`,
+    `mt`.`dispatch_challan_type_id` as `product_type_id`,
+    `mt`.`dispatch_challan_type_id` as `dispatch_challan_type_id`,
+    `mt`.`customer_id` as `customer_id`,
+    `mt`.`customer_contacts_ids` as `customer_contacts_ids`,
+    `mt`.`customer_state_id` as `customer_state_id`,
+    `mt`.`customer_city_id` as `customer_city_id`,
+    `mt`.`consignee_id` as `consignee_id`,
+    `mt`.`consignee_state_id` as `consignee_state_id`,
+    `mt`.`consignee_city_id` as `consignee_city_id`,
+    `mt`.`transporter_id` as `transporter_id`,
+    `mt`.`approved_by_id` as `approved_by_id`
+from
+    (((((((`mt_dispatch_challan_details_trading` `dt`
+left join `mtv_dispatch_challan_master_trading` `mt` on
+    (`mt`.`dispatch_challan_master_transaction_id` = `dt`.`dispatch_challan_master_transaction_id`
+        and `mt`.`company_id` = `dt`.`company_id`))
+left join `cm_hsn_sac` `h1` on
+    (`h1`.`hsn_sac_id` = `dt`.`hsn_sac_id`
+        and `h1`.`is_delete` = 0))
+left join `cm_hsn_sac` `h` on
+    (`h`.`hsn_sac_id` = `mt`.`freight_hsn_code_id`
+        and `h1`.`is_delete` = 0))
+left join `sm_product_packing` `p` on
+    (`p`.`product_packing_id` = `dt`.`product_material_packing_id`
+        and `p`.`is_delete` = 0))
+left join `sm_product_unit` `u` on
+    (`u`.`product_unit_id` = `dt`.`product_material_unit_id`
+        and `u`.`is_delete` = 0))
+left join `sm_product_fg` `rm` on
+    (`rm`.`product_fg_id` = `dt`.`product_material_id`))
+left join `cmv_company_summary` `v` on
+    (`v`.`company_id` = `dt`.`company_id`))
+where
+    `mt`.`is_delete` = 0;
+
+
+
+
+-- erp_dev.mtv_dispatch_challan_master_trading_rpt source
+
+create or replace
+algorithm = UNDEFINED view `mtv_dispatch_challan_master_trading_rpt` as
+select
+    concat(`v`.`dispatch_challan_no`, ':Challan No:Y:T:') as `dispatch_challan_no`,
+    concat(`v`.`dispatch_challan_date`, ':Challan Date:Y:D:') as `dispatch_challan_date`,
+    concat(`v`.`dispatch_challan_version`, ':Challan Version:O:N:') as `dispatch_challan_version`,
+    concat('', ':Total Dispatch Quantity:O:N:') as `total_dispatch_quantity`,
+    concat('', ':Total Dispatch Weight:O:N:') as `total_dispatch_weight`,
+    concat(ifnull(`v`.`job_type`, ''), ':Job Type:Y:T:') as `job_type`,
+    concat(ifnull(`v`.`sales_dispatch_type`, ''), ':Sales Challan Type:Y:T:') as `sales_dispatch_type`,
+    concat(ifnull(`v`.`dispatch_hsnTax_type`, ''), ':Challan Tax Type:Y:T:') as `dispatch_hsnTax_type`,
+    concat(ifnull(`v`.`dispatch_sales_type`, ''), ':Challan Sales Type:Y:T:') as `dispatch_sales_type`,
+    concat(ifnull(`v`.`dispatch_voucher_type`, ''), ':Challan Voucher Type:Y:T:') as `dispatch_voucher_type`,
+    concat(`v`.`customer_name`, ':Customer Name:Y:T:') as `customer_name`,
+    concat(`v`.`dispatch_challan_status_desc`, ':Challan Status:Y:H:(Aprroved,Partial Sales Issue,Rejected,Completed,Canceled,Dispath Challan Created,Invoice Created,Pending)') as `dispatch_challan_status_desc`,
+    concat(`v`.`dispatch_challan_type`, ':Challan Type:Y:T:') as `dispatch_challan_type`,
+    concat(ifnull(`v`.`driver_name`, ''), ':Driver Name:Y:T:') as `driver_name`,
+    concat(`v`.`vehicle_no`, ':Vehicle No:Y:T:') as `vehicle_no`,
+    concat(`v`.`vehicle_type`, ':Vehicle Type:O:N:') as `vehicle_type`,
+    concat(`v`.`loading_time`, ':Loading Time:O:N:') as `loading_time`,
+    concat(`v`.`dispatch_challan_creation_type`, ':Challan Creation Type:Y:H:(Mannual,Dispatch Schedule Based,Sales Order Based)') as `dispatch_challan_creation_type_desc`,
+    concat(`v`.`dispatch_challan_status`, ':Dispatch Challan Status:O:N:') as `dispatch_challan_status`,
+    concat(`v`.`dispatch_challan_creation_type`, ':Dispatch Challan Creation Type:O:N:') as `dispatch_challan_creation_type`,
+    concat(`v`.`customer_email`, ':Customer Email:O:N:') as `customer_email`,
+    concat(`v`.`customer_city_name`, ':Customer City:O:N:') as `customer_city_name`,
+    concat(`v`.`customer_gst_no`, ':Customer GST No:O:N:') as `customer_gst_no`,
+    concat(`v`.`customer_pan_no`, ':Customer Pan No:O:N:') as `customer_pan_no`,
+    concat(`v`.`customer_state_name`, ':Customer State:O:N:') as `customer_state_name`,
+    concat(`v`.`consignee_name`, ':Consignee Name:Y:T:') as `consignee_name`,
+    concat(`v`.`consignee_email`, ':Consignee Email:O:N:') as `consignee_email`,
+    concat(`v`.`consignee_city_name`, ':Consignee City:O:N:') as `consignee_city_name`,
+    concat(`v`.`consignee_state_name`, ':Consignee State:O:N:') as `consignee_state_name`,
+    concat(`v`.`consignee_gst_no`, ':Consignee GST No:O:N:') as `consignee_gst_no`,
+    concat(`v`.`consignee_pan_no`, ':Consignee Pan No:O:N:') as `consignee_pan_no`,
+    concat(`v`.`remark`, ':Remark:O:N:') as `remark`,
+    concat(`v`.`company_name`, ':Company Name:Y:C:cmv_company_summary:F') as `company_name`,
+    concat(`v`.`company_branch_name`, ':Company Branch:Y:C:cmv_company_branch:F') as `company_branch_name`,
+    concat(`v`.`financial_year`, ':Financial Year:Y:C:amv_financial_year:F') as `financial_year`,
+    concat(case when `v`.`is_active` = 1 then 'Active' else 'In Active' end, ':Active Status:Y:H:(Active, In Active)') as `Active`,
+    concat(case when `v`.`is_delete` = 1 then 'Yes' else 'No' end, ':Deleted Status:Y:H:(Yes, No)') as `Deleted`,
+    concat(`v`.`created_by`, ':Created By:O:N:') as `created_by`,
+    concat(`v`.`created_on`, ':Created On:O:N:') as `created_on`,
+    concat(`v`.`modified_by`, ':Modified By:O:N:') as `modified_by`,
+    concat(`v`.`modified_on`, ':Modified On:O:N:') as `modified_on`,
+    concat(`v`.`deleted_by`, ':Deleted By:O:N:') as `deleted_by`,
+    concat(`v`.`deleted_on`, ':Deleted On:O:N:') as `deleted_on`,
+    concat(`v`.`company_id`, ':Company Id:N:N:') as `company_id`,
+    concat(`v`.`company_branch_id`, ':Company Branch Id:N:N:') as `company_branch_id`,
+    concat(`v`.`dispatch_challan_master_transaction_id`, ':Dispatch Challan Master Transaction Id:O:N:') as `dispatch_challan_master_transaction_id`,
+    concat(`v`.`customer_id`, ':Customer Id:N:N:') as `customer_id`,
+    concat(`v`.`customer_contacts_ids`, ':Customer Contacts Ids:N:N:') as `customer_contacts_ids`,
+    concat(`v`.`customer_state_id`, ':Customer State Id:N:N:') as `customer_state_id`,
+    concat(`v`.`customer_city_id`, ':Customer City Id:N:N:') as `customer_city_id`,
+    concat(`v`.`consignee_id`, ':Consignee Id:N:N:') as `consignee_id`,
+    concat(`v`.`consignee_state_id`, ':Consignee State Id:N:N:') as `consignee_state_id`,
+    concat(`v`.`consignee_city_id`, ':Consignee City Id:N:N:') as `consignee_city_id`,
+    concat(`v`.`approved_by_id`, ':Approved By Id:N:N:') as `approved_by_id`,
+    concat(`v`.`agent_id`, ':Agent Id:N:N:') as `agent_id`,
+    concat(`v`.`freight_hsn_code_id`, ':Freight Hsn Code Id:N:N:') as `freight_hsn_code_id`,
+    concat(`v`.`transporter_id`, ':Transporter Id:N:N:') as `transporter_id`,
+    concat(`v`.`dispatch_challan_type_id`, ':Dispatch Challan Type Id:N:N:') as `dispatch_challan_type_id`
+from
+    `mtv_dispatch_challan_master_trading` `v`
+limit 1;
+
+
+-- erp_dev.mtv_dispatch_challan_details_trading_rpt source
+
+create or replace
+algorithm = UNDEFINED view `mtv_dispatch_challan_details_trading_rpt` as
+select
+    concat(`v`.`dispatch_challan_no`, ':Dispatch Challan No:Y:T:') as `dispatch_challan_no`,
+    concat(`v`.`dispatch_challan_date`, ':Dispatch Challan Date:Y:D:') as `dispatch_challan_date`,
+    concat(`v`.`dispatch_challan_version`, ':Dispatch Challan Version:O:N:') as `dispatch_challan_version`,
+    concat(`v`.`customer_name`, ':Customer Name:Y:T:') as `customer_name`,
+    concat(`v`.`dispatch_challan_item_status`, ':Dispatch Challan Item Status:Y:H:(Aprroved,Partial Sales Issue,Rejected,Completed,Canceled,Dispath Challan Created,Invoice Created,Pending)') as `dispatch_challan_item_status_desc`,
+    concat(`v`.`sales_order_no`, ':Sales Order No:Y:T:') as `sales_order_no`,
+    concat(`v`.`product_material_print_name`, ':Product Print Name:Y:T:') as `product_material_print_name`,
+    concat(`v`.`product_packing_name`, ':Product Packing Name:Y:C:smv_product_packing:F') as `product_packing_name`,
+    concat(`v`.`dispatch_challan_creation_type_desc`, ':Dispatch Challan Creation Type Desc:O:N:') as `dispatch_challan_creation_type_desc`,
+    concat(`v`.`customer_order_no`, ':Customer Order No:Y:C:mtv_dispatch_challan_details_trading:O') as `customer_order_no`,
+    concat(`v`.`customer_order_Date`, ':Customer Order Date:Y:D:') as `customer_order_Date`,
+    concat(`v`.`product_unit_name`, ':Product Unit Name:Y:C:smv_product_unit:F') as `product_unit_name`,
+    concat(`v`.`dispatch_quantity`, ':Dispatch Quantity:O:N:') as `dispatch_quantity`,
+    concat(`v`.`dispatch_weight`, ':Dispatch Weight:O:N:') as `dispatch_weight`,
+    concat(`v`.`sales_order_Date`, ':Sales Order Date:Y:D:') as `sales_order_Date`,
+     concat(ifnull(`v`.`driver_name`, ''), ':Driver Name:Y:T:') as `driver_name`,
+    concat(`v`.`vehicle_no`, ':Vehicle No:O:N:') as `vehicle_no`,
+    concat(`v`.`vehicle_type`, ':Vehicle Type:O:N:') as `vehicle_type`,
+    concat(`v`.`loading_time`, ':Loading Time:O:N:') as `loading_time`,
+    concat(`v`.`dispatch_return_quantity`, ':Dispatch Return Quantity:O:N:') as `dispatch_return_quantity`,
+    concat(`v`.`dispatch_return_weight`, ':Dispatch Return Weight:O:N:') as `dispatch_return_weight`,
+    concat(`v`.`dispatch_challan_item_status`, ':Dispatch Challan Item Status:N:N:') as `dispatch_challan_item_status`,
+    concat(`v`.`dispatch_challan_status`, ':Dispatch Challan Status:N:N:') as `dispatch_challan_status`,
+    concat(`v`.`dispatch_challan_type`, ':Dispatch Challan Type:O:N:') as `dispatch_challan_type`,
+    concat(`v`.`customer_email`, ':Customer Email:O:N:') as `customer_email`,
+    concat(`v`.`customer_city_name`, ':Customer City:O:N:') as `customer_city_name`,
+    concat(`v`.`consignee_email`, ':Consignee Email:O:N:') as `consignee_email`,
+    concat(`v`.`consignee_city_name`, ':Consignee City:O:N:') as `consignee_city_name`,
+    concat(`v`.`customer_state_name`, ':Customer State:O:N:') as `customer_state_name`,
+    concat(`v`.`consignee_name`, ':Consignee Name:Y:C:cmv_customer_summary:F') as `consignee_name`,
+    concat(`v`.`consignee_state_name`, ':Consignee State:O:N:') as `consignee_state_name`,
+    concat(`v`.`approved_date`, ':Approved Date:Y:D:') as `approved_date`,
+    concat(`v`.`customer_gst_no`, ':Customer GST No:O:N:') as `customer_gst_no`,
+    concat(`v`.`consignee_gst_no`, ':Consignee GST No:O:N:') as `consignee_gst_no`,
+    concat(`v`.`customer_pan_no`, ':Customer Pan No:O:N:') as `customer_pan_no`,
+    concat(`v`.`consignee_pan_no`, ':Consignee Pan No:O:N:') as `consignee_pan_no`,
+    concat(`v`.`remark`, ':Remark:O:N:') as `remark`,
+    concat(`v`.`company_name`, ':Company Name:Y:C:cmv_company_summary:F') as `company_name`,
+    concat(`v`.`company_branch_name`, ':Company Branch Name:Y:C:cmv_company_branch_summary:F') as `company_branch_name`,
+    concat(`v`.`financial_year`, ':Financial Year:O:N:') as `financial_year`,
+    concat(case when `v`.`is_active` = 1 then 'Active' else 'In Active' end, ':Active Status:Y:H:(Active, In Active)') as `Active`,
+    concat(case when `v`.`is_delete` = 1 then 'Yes' else 'No' end, ':Deleted Status:Y:H:(Yes, No)') as `Deleted`,
+    concat(`v`.`created_by`, ':Created By:O:N:') as `created_by`,
+    concat(`v`.`created_on`, ':Created On:O:N:') as `created_on`,
+    concat(`v`.`modified_by`, ':Modified By:O:N:') as `modified_by`,
+    concat(`v`.`modified_on`, ':Modified On:O:N:') as `modified_on`,
+    concat(`v`.`deleted_by`, ':Deleted By:O:N:') as `deleted_by`,
+    concat(`v`.`deleted_on`, ':Deleted On:O:N:') as `deleted_on`,
+    concat(`v`.`company_id`, ':Company Id:N:N:') as `company_id`,
+    concat(`v`.`company_branch_id`, ':Company Branch Id:N:N:') as `company_branch_id`,
+    concat(`v`.`freight_hsn_code_id`, ':Freight Hsn Code Id:N:N:') as `freight_hsn_code_id`,
+    concat(`v`.`dispatch_challan_master_transaction_id`, ':Dispatch Challan Master Transaction Id:O:N:') as `dispatch_challan_master_transaction_id`,
+    concat(`v`.`expected_branch_id`, ':Expected Branch Id:N:N:') as `expected_branch_id`,
+    concat(`v`.`dispatch_challan_type_id`, ':Dispatch Challan Type Id:N:N:') as `dispatch_challan_type_id`,
+    concat(`v`.`customer_id`, ':Customer Id:N:N:') as `customer_id`,
+    concat(`v`.`agent_id`, ':Agent Id:N:N:') as `agent_id`,
+    concat(`v`.`product_material_id`, ':Product Material Id:N:N:') as `product_material_id`,
+    concat(`v`.`customer_contacts_ids`, ':Customer Contacts Ids:N:N:') as `customer_contacts_ids`,
+    concat(`v`.`customer_state_id`, ':Customer State Id:N:N:') as `customer_state_id`,
+    concat(`v`.`customer_city_id`, ':Customer City Id:N:N:') as `customer_city_id`,
+    concat(`v`.`consignee_id`, ':Consignee Id:N:N:') as `consignee_id`,
+    concat(`v`.`product_material_unit_id`, ':Product Material Unit Id:N:N:') as `product_material_unit_id`,
+    concat(`v`.`product_material_packing_id`, 'product_material_packing_id:N:N:') as `product_material_packing_id`,
+    concat(`v`.`consignee_state_id`, ':Consignee State Id:N:N:') as `consignee_state_id`,
+    concat(`v`.`consignee_city_id`, ':Consignee City Id:N:N:') as `consignee_city_id`,
+    concat(`v`.`transporter_id`, ':Transporter Id:N:N:') as `transporter_id`,
+    concat(`v`.`approved_by_id`, ':Approved By Id:N:N:') as `approved_by_id`
+from
+    `mtv_dispatch_challan_details_trading` `v`
+limit 1;

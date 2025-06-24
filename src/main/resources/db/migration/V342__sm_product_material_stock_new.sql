@@ -1,0 +1,1 @@
+ALTER TABLE sm_product_material_stock_new ADD quality_status varchar(1) DEFAULT 'P' NULL;

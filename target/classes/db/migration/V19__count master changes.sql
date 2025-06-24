@@ -1,0 +1,1 @@
+ALTER TABLE xm_spinning_prod_count MODIFY COLUMN production_count_desc varchar(500) DEFAULT NULL;

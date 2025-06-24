@@ -1,0 +1,32 @@
+-- erp_development.mt_sales_order_sauda_sheet definition
+
+CREATE TABLE `mt_sales_order_sauda_sheet` (
+  `sales_order_sauda_sheet_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '* read only back end auto generated *',
+  `sales_order_master_transaction_id` bigint(20) NOT NULL COMMENT '* read only back end auto generated *',
+  `company_id` bigint(20) NOT NULL DEFAULT 1 COMMENT '*backend from session  ',
+  `company_branch_id` bigint(20) NOT NULL DEFAULT 1 COMMENT '*combo box with cmv_company_branch  and set default backend from session  *',
+  `financial_year` varchar(20) NOT NULL,
+  `sales_order_no` varchar(50) NOT NULL COMMENT '*read only text box Combination of Company Short name/FyearShort name/ProductType_group / SO0000Last ID',
+  `sales_order_date` date NOT NULL COMMENT '* DTPpicker Data Entry',
+  `warp_crimp` decimal(18,4) DEFAULT 0.0000 COMMENT '*  text box with data entry and numeric validation',
+  `weft_crimp` decimal(18,4) DEFAULT 0.0000 COMMENT '*  text box with data entry and numeric validation',
+  `warp_waste` decimal(18,4) DEFAULT 0.0000 COMMENT '*  text box with data entry and numeric validation',
+  `weft_waste` decimal(18,4) DEFAULT 0.0000 COMMENT '*  text box with data entry and numeric validation',
+  `req_warp_per_kg` decimal(18,4) DEFAULT 0.0000 COMMENT '*  text box with data entry and numeric validation',
+  `req_weft_per_kg` decimal(18,4) DEFAULT 0.0000 COMMENT '*  text box with data entry and numeric validation',
+  `glm_without_size` decimal(18,4) DEFAULT 0.0000 COMMENT '*  text box with data entry and numeric validation',
+  `req_order_quantity` decimal(18,4) DEFAULT 0.0000 COMMENT '*  text box with data entry and numeric validation',
+  `count` varchar(55) NOT NULL COMMENT 'P-Pending,A-Aprroved,  C-Completed, X-Canceled',
+  `sales_order_status` varchar(1) DEFAULT 'P' COMMENT 'P-Pending,A-Aprroved, R-Rejected,I-Partial Issue, C-Completed, X-Canceled Z-PreeClosed',
+  `is_active` bit(1) DEFAULT b'1',
+  `is_delete` bit(1) DEFAULT b'0',
+  `created_by` varchar(255) DEFAULT '1',
+  `created_on` datetime DEFAULT NULL,
+  `modified_by` varchar(255) DEFAULT NULL,
+  `modified_on` datetime DEFAULT NULL,
+  `deleted_by` varchar(255) DEFAULT NULL,
+  `deleted_on` datetime DEFAULT NULL,
+  `product_material_id` bigint(20) NOT NULL,
+  `product_material_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`sales_order_sauda_sheet_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
